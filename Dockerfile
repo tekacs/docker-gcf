@@ -12,6 +12,7 @@ RUN \
     sudo apt-get update && sudo apt-get install -y google-cloud-sdk
 
 RUN yarn global add @google-cloud/functions-emulator && yarn && yarn cache clean
-EXPOSE 8010
+RUN functions config set bindHost 0.0.0.0 && functions config set supervisorPort 80 && functions config set tail true
+EXPOSE 80
 
-CMD ['functions', 'start']
+CMD ["./start.sh"]
